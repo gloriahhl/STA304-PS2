@@ -1,0 +1,35 @@
+---
+title: "PS 2 CODES"
+author: "Zizhuo Huang, Hailan Huang, Siyi Lin"
+date: "2020/10/17"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+```{r cars}
+data <- read.csv("E:/Third Year/STA304/PS2/gss.csv")
+```
+
+
+```{r}
+model.lm <- lm(feelings_life ~ age + total_children + age_at_first_birth + province + pop_center + marital_status + education + own_rent + living_arrangement + average_hours_worked + self_rated_health + self_rated_mental_health + income_respondent + children_in_household, data = data)
+summary(model.lm)
+```
+
+feelings_life = 7.550121 - 0.011385 * age_at_first_birth + 0.422244 * marital_statusLiving common-law + 0.568070 * marital_statusMarried + 0.181354 * marital_statusWidowed + 1.223936 * self_rated_mental_healthExcellent - 1.178450 * self_rated_mental_healthFair - 3.013628 * self_rated_mental_healthPoor
+
+
+#normal Q-Q
+```{r}
+plot(model.lm, 2)
+```
+
+
+
+ 
+
+#
