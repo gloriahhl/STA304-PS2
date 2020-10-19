@@ -1,0 +1,125 @@
+---
+title: "Age at First Nirth, Living Arrangement, Education, and Mental Health Status are Influnential to People's Life Satisfaction Level."
+author: "Zizhuo Huang 1004707622, Hailan Huang 1005455614, Siyi Lin 1005274178"
+date: "2020/10/19"
+output:
+  html_document:
+    df_print: paged
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+
+## Abstract
+
+  This paper uses the General Social Survey data set which is an investigation on respondents' family, marriage, and other different aspects. We create a linear regression model to research Canadians' satisfaction level of life and we find that some living conditions and lifestyles do have influences on it. People's feelings of life will significantly vary with such living conditions. Besides, we add some comments about our model.
+
+## Introduction
+
+  Family is very important in Canada. Each family member acts an essential role in the family. Canada's government can do more for its citizens to make their life better. Therefore, our goal of this analysis is to find out which aspects mostly influence their satisfaction level of life. If a certain aspect makes people's feelings of life higher, the government should maintain the current policies or benefits which affects this aspect; inversely, the government should publish new policies to improve people's life quality.
+  First of all, we criticize the survey and filter out some variables we are interested in to set up a linear regression model. Secondly, according to the result of the model, we can make a conclusion to verify that the variables we selected are influential on respondents' feelings of life. Lastly, we evaluate our model and figure out how we can make improvement.
+
+## Data
+
+Based on this survey and data of from GSS dataset, we can clearly see that two primary objectives of this survey:
+
+1)	To gather data on social trends in order to monitor changes in the living conditions and well-being of Canadian over time.
+
+2)	To provide information on specific social policy issues of current or emerging interest. 
+
+	In order to achieve these two objectives, GSS survey data consists of two parts: classifi-cation variables and core content. The variables are to divide population groups into certain parts, so that we can do analyze each group deeply, and compare those groups. We collect all the data by a questionnaire asking random people from the sample population. Moreover, we change all the variable names in a meaningful way so that readers can easily understand. 
+	
+	The target population of this survey is all the persons 15 years of age and older in Cana-da, excluding residents of the Yukon, Northwest Territories, and Nunavut and full-time residents of institutions. The population frame are the lists of telephone numbers in use available to Statis-tics Canada from various sources and the Address Register.
+	
+	The variables we use from the dataset are age, total children, age at first birth, province, pop centre, marital status education, own rent, living arrangement, average hours worked, self rated health, self rated mental health, income respondent and children in household.
+	
+	According to the summary of the questionnaire content,  we observe that most of ques-tions are open-ended type which gives us richer and detailed responses, making the survey re-sults more personalized. However, the cons are the difficulty to analyze the data and more time to spend gathering and reading them, such that intentions and reasons to form a union and or-ganization and decision making within the household. Meanwhile, closed question such as entry component and the time leaving the parental home are given numerical information which are easy to make a report, nevertheless, there may exists some limitation of the report data based on the closed question, we cannot able to consider the special cases among these samples. 
+	
+	Additionally, based on the content of those question, since the survey question are indi-vidualized, therefore, those questions are unbiased and balanced. On the other hand, due to question specification, survey requires detailed responses from each people. Thus, people who cannot answer certain question may give up the survey and we may lose the information from them which makes the results unfair to represent the target people. For example, asking a teen-ager whose age is 20 about arrangements and financial support after a separation or divorce does not make any sense, since he/she has not experienced a separation or divorce with his/her partner. Such question only bring us issue of under reporting. Besides, some question are not easy and clear to understand which makes people lose interest to complete this survey. Those concern may fail us to monitor changes in the living conditions and well-being of Canadian somehow.
+
+
+## Model
+
+```{r, echo=F}
+data <- read.csv("E:/Third Year/STA304/PS2/gss.csv")
+
+model.lm <- lm(feelings_life ~ age + total_children + age_at_first_birth + province + pop_center + marital_status + education + own_rent + living_arrangement + average_hours_worked + self_rated_health + self_rated_mental_health + income_respondent + children_in_household, data = data)
+
+summary(model.lm)
+```
+
+  We set a linear regression model with feelings_life as a response variable versus many other living conditions as predictors. Predictors include age, total_children, age_at_first_birth, province, pop_center, marital_status education, own_rent, living_arrangement, average_hours_worked, self_rated_health, self_rated_mental_health, income_respondent, children_in_household. We choose these variables because they were fully answered (with only a few NA), so such variables are more reliable.
+  
+  From the regression model, we can establish a mathematical function: feelings_life = 6.513515 - 0.014544 * age_at_first_birth + 0.263218 * provinceNew Brunswick + 0.509039 * marital_statusLiving common-law + 0.586853 * marital_statusMarried + 0.24764 * educationLess than high school diploma or its equivalent -2.838867 * self_rated_mental_healthPoor + 1.26
+  
+  This model can help us to research which living conditions make big differences on feelings of life and how people's satisfaction of life changes with such variables numerically. As some of living conditions are categorical. So in the linear equation, it means that 1 represents it while 0 represents any other options in the same aspect.
+
+## Results
+
+  According to the linear regression summary created above, we find that there are 5 living conditions including at least one option with p-value locating between 0 and 0.001. A predictor with a low p-value is likely to be a meaningful addition to the model because changes in the predictor's value are related to changes in the response variable. That is to say, these variables can affect people's feelings of life mostly. Variables are:
+
+1.age of respondents at giving first birth
+
+2.respondents living in province New Brunswick
+
+3.respondents living with common-law couple
+
+4.respondents living with married couple
+
+5.respondents with education less than high school diploma or its equivalent
+
+6.respondents with low self-rated mental health
+
+
+  Recall the function of new model: feelings_life = 6.513515 - 0.014544 * age_at_first_birth + 0.263218 * provinceNew Brunswick + 0.509039 * marital_statusLiving common-law + 0.586853 * marital_statusMarried + 0.24764 * educationLess than high school diploma or its equivalent -2.838867 * self_rated_mental_healthPoor + 1.26
+
+1.When all other variables are zero, respondents' satisfaction score is about 6.513515.
+
+2.As age of respondents at giving first birth increases by 1 unit, the satisfaction score decreases by 0.014544 units.
+
+3.As the respondent living in province New Brunswick, the satisfaction score increases by 0.263218 units.
+
+4.As the respondent living living with common-law couple, the satisfaction score increases by 0.509039 units.
+
+5.As the respondent living living with married couple, the satisfaction score increases by 0.586853 units.
+
+6.As the respondent get education less than high school diploma or its equivalent, the satisfaction score increases by 0.24764 units.
+
+7.As the respondent have low self-rated mental health, the satisfaction score decreases by 2.838867 units.
+
+  We also find that r-squared which represents the proportion of the variance for a dependent variable that's explained by variables in regression model is 0.2684. Thus, about a quarter of the observed variation can be explained by the model's inputs.
+
+
+## Discussion
+
+  In conclusion, among 6 effectively-influential variables, provinceNew Brunswick, marital_statusLiving common-law, marital_statusMarried, educationLess than high school diploma or its equivalent have positive effects while age_at_first_birth and self_rated_mental_healthPoor are negatively influenced. Therefore, respondents will have more satisfaction on life if they live with someone else which is because they will not feel lonely and reunion always brings joy. Additionally, the later respondents having a child and the worse their mental is, the less satisfaction they have in lives. The former is because of children may cost a lot (i.e. money and time) and young respondents do not have enough ability to afford it, which give a heavy burden on them instead of felicity. The latter, mental health is a direct reason relating to the feelings of life. Respondents bothering with illness from mentality will definitely feel depressed in their lives.
+
+  Therefore, government could establish policies such as giving out subsidies to those who are under the average financial level, increasing the child benefit so that they can afford the pressure of having a child when they are young, and providing more free mental health assistance.
+  
+  The data set came from the result of the questioner of the General Social Survey, which was conducted by the Canadian government in 2017 for the purpose on family and household issues. There are still some limitations because our model is still a prediction model, it is possible for some errors to exist which cause it a bit different from the true relationship. Also, not everyone in the world follows the same model pattern, it is possible to appear restrictions.
+
+
+# Weaknesses
+
+```{r}
+plot(model.lm, 2)
+```
+
+  In order to check the accuracy of our model, we create a normal Q-Q plot which shows if residuals are normally distributed. It is illustrated that around a quarter of the residuals are off the straight dashed line. Overall, it is not good enough to say that residuals are normally distributed since it is heavy tailed.
+  
+  There are too many categorical variables in this GSS data set, therefore it is sometimes hard to create a perfect model to demonstrate our analysis.
+
+# Next Steps
+
+  We can include more variables to set up the model and see if there will be a possible better model than the one we created previously, since it was not that accurate according to the normal Q-Q plot. Also, we can introduce other methods to fit a model, such as cross validations and box-cox transformations.
+  
+  We can also conduct a follow-up survey on only testing respondents' feelings/satisfaction on life. From the follow-up survey, we can find out if the variables we selected in the above model are actually influential, and we can also investigate on other factors which will make changes on this topic.
+
+## References
+
+1. citation of "tidyverse" - a statistical package.
+
+
+
